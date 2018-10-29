@@ -1,0 +1,42 @@
+[
+    {
+        "cwb_ty_no": 8,
+        "report_no": "1",
+        "type": "SEA",
+        "cwb_typhoon_name": "瑪莉亞",
+        "issue": "2018-07-09T14:30+08:00",
+        "typhoon_name": "MARIA"
+    },
+    {
+        "cwb_ty_no": 8,
+        "report_no": "4",
+        "type": "LAND",
+        "cwb_typhoon_name": "瑪莉亞",
+        "issue": "2018-07-09T23:30+08:00",
+        "typhoon_name": "MARIA"
+    },
+    {
+        "cwb_ty_no": 8,
+        "report_no": "17",
+        "type": "END",
+        "cwb_typhoon_name": "瑪莉亞",
+        "issue": "2018-07-11T14:30+08:00",
+        "typhoon_name": "MARIA"
+    },
+    {
+        "cwb_ty_no": 22,
+        "report_no": "1",
+        "type": "SEA",
+        "cwb_typhoon_name": "山竹",
+        "issue": "2018-09-14T11:30+08:00",
+        "typhoon_name": "MANGKHUT"
+    },
+    {
+        "cwb_ty_no": 22,
+        "report_no": "12",
+        "type": "END",
+        "cwb_typhoon_name": "山竹",
+        "issue": "2018-09-15T20:30+08:00",
+        "typhoon_name": "MANGKHUT"
+    }
+]

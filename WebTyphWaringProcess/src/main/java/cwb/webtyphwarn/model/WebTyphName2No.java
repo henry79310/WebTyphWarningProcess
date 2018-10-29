@@ -1,7 +1,5 @@
 package cwb.webtyphwarn.model;
 
-import java.sql.Timestamp;
-
 public class WebTyphName2No {
 	private String typhNo;
 	private String typhNameEng;

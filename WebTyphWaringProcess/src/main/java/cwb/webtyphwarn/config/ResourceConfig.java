@@ -18,9 +18,17 @@ public class ResourceConfig {
 	@Value("${type.changing.history.url}")
 	private String typeChangingHistoryUrl;
 	@Bean("typeChangingHistoryUrl")
-	public String getCarClientUrl() {
+	public String getTypeChangingHistoryUrl() {
 		return typeChangingHistoryUrl;
 	}
+	
+	@Value("${warning.url}")
+	private String warningUrl;
+	@Bean("warningUrl")
+	public String getWarningUrlUrl() {
+		return warningUrl;
+	}
+	
 	
 	@Bean
 	public static PropertySourcesPlaceholderConfigurer properties() {

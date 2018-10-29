@@ -29,15 +29,17 @@ public class WebTyphRestfulApiClient {
 	@Qualifier("typeChangingHistoryUrl")
 	private String typeChangingHistoryUrl;
 	
+	@Autowired
+	@Qualifier("warningUrl")
+	private String warningUrl;
 	
 	public TypeChangingHistory[] requestTypeChangingHistory() throws JsonParseException, JsonMappingException, IOException {
 		
 		ClientConfig config = new ClientConfig();
 		Client client = ClientBuilder.newClient(config);
 
-		WebTarget target = client.target(typeChangingHistoryUrl);
-		String response = target.request().accept(MediaType.APPLICATION_JSON).get(String.class);
-		System.out.println(response);
+		//WebTarget target = client.target(typeChangingHistoryUrl);
+		//String response = target.request().accept(MediaType.APPLICATION_JSON).get(String.class);
 		ObjectMapper objectMapper = new ObjectMapper();
 		
 		File file = Paths.get("src/test/resources/type-changing-history_2018.json").toFile();
@@ -51,8 +53,8 @@ public class WebTyphRestfulApiClient {
 		ClientConfig config = new ClientConfig();
 		Client client = ClientBuilder.newClient(config);
 
-		WebTarget target = client.target(typeChangingHistoryUrl);
-		String response = target.request().accept(MediaType.APPLICATION_JSON).get(String.class);
+		//WebTarget target = client.target(warningUrl);
+		//String response = target.request().accept(MediaType.APPLICATION_JSON).get(String.class);
 		ObjectMapper objectMapper = new ObjectMapper();
 		
 		File file = Paths.get("src/test/resources/warning_2018.json").toFile();

@@ -1,9 +1,9 @@
 package cwb.webtyphwarn.process;
 
-import java.util.List;
+import java.util.Set;
 
 import cwb.webtyphwarn.model.WebTyphWarning;
 
 public interface WebTyphWarningDao {
-	public void insertWebTyphWarnings(List<WebTyphWarning> webTyphWarnings);
+	public void insertWebTyphWarnings(Set<WebTyphWarning> webTyphWarnings);
 }

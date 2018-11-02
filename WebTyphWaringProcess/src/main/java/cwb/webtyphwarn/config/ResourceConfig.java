@@ -1,5 +1,7 @@
 package cwb.webtyphwarn.config;
 
+import java.util.Calendar;
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -27,6 +29,17 @@ public class ResourceConfig {
 	@Bean("warningUrl")
 	public String getWarningUrlUrl() {
 		return warningUrl;
+	}
+	
+	@Value("${type.changing.history.year}")
+	private String typeChangingHistoryYear;
+	@Bean("typeChangingHistoryYear")
+	public int getTypeChangingHistoryYear() {
+		try {
+			return Integer.parseInt(typeChangingHistoryYear);
+		}catch(Exception e) {
+			return Calendar.getInstance().get(Calendar.YEAR);
+		}
 	}
 	
 	

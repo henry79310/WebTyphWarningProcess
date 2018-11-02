@@ -19,12 +19,19 @@ repositories {
 dependencies {
     compile group: 'org.glassfish.jersey.core', name: 'jersey-client', version: '2.27'
 	compile group: 'org.glassfish.jersey.inject', name: 'jersey-hk2', version: '2.27'
+    compile group: 'org.glassfish.jersey.connectors', name: 'jersey-apache-connector', version: '2.27'
+    compile group: 'org.glassfish.jersey.media', name: 'jersey-media-json-jackson', version: '2.27'
+    
     compile group: 'com.fasterxml.jackson.core', name: 'jackson-core', version: '2.9.7'
 	compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.9.7'
     compile group: 'mysql', name: 'mysql-connector-java', version: '5.1.47'
     compile group: 'org.springframework', name: 'spring-jdbc', version: '5.0.7.RELEASE'
     compile group: 'org.springframework', name: 'spring-context', version: '5.1.0.RELEASE'
     compile group: 'hikari-cp', name: 'hikari-cp', version: '2.6.0'
+    compile group: 'org.apache.httpcomponents', name: 'httpclient', version: '4.5.3'
+    
+    	compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.7'
+    
    
     compile group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.11.1'
     

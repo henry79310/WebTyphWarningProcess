@@ -3,10 +3,10 @@ package cwb.webtyphwarn.process;
 import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -43,19 +43,17 @@ private static final Logger processorLogger = LogManager.getLogger(WebTyphProces
 
 	
 	public void process() {
+		
 		try {
 			
+			// initial java object to ORM
+			
+			Map<String, WebTyphName2No> webTyphName2NoMap = new HashMap<>();
+			Set<WebTyphWarning> webTyphWarningList = new HashSet<>();
+						
 			// get changing history values
 			TypeChangingHistory[] typeChangingHistories = webTyphRestfulApiClient.requestTypeChangingHistory();
-			// get warning values
-			Warning[] warnings = webTyphRestfulApiClient.requestWarning();
-			
-			// initial java object to ORM
-			Map<String, WebTyphName2No> webTyphName2NoMap = new HashMap<>();
-			List<WebTyphWarning> webTyphWarningList = new ArrayList<>();
-			
-			// Mapping jackson2 object to java object ...
-			for(TypeChangingHistory typeChangingHistory:typeChangingHistories) {
+			for(TypeChangingHistory typeChangingHistory: typeChangingHistories) {
 				// check if typhoon name exists or not & create webType
 				if(!webTyphName2NoMap.containsKey(typeChangingHistory.getTyphoonName())) {
 					WebTyphName2No webTypName2No = new WebTyphName2No();
@@ -63,27 +61,23 @@ private static final Logger processorLogger = LogManager.getLogger(WebTyphProces
 							.append(typeChangingHistory.getIssue().substring(0,4))
 							.append(typeChangingHistory.getCwbTyNo()).toString();
 					webTypName2No.setTyphNo(typeNo);
-					System.out.println(typeChangingHistory.getCwbTyphoonName());
 					webTypName2No.setTyphNameCht(typeChangingHistory.getCwbTyphoonName());
 					webTypName2No.setTyphNameEng(typeChangingHistory.getTyphoonName());
 					webTyphName2NoMap.put(typeChangingHistory.getTyphoonName(), webTypName2No);
 				}
-				
-				// find item in warnings & add to the list.
+				// get warning values
+				Warning[] warnings = webTyphRestfulApiClient.requestWarning(typeChangingHistory);
 				for(Warning warning:warnings) {
 					// assume Tcs size is always 1
 					if(warning.getTcs().size() != 1) {
 						continue;
 					}
-					
-					
 					Tc tc = warning.getTcs().get(0);
 					String issue = warning.getIssue();
 					String typhoonName = tc.getTyphoonName();
 					String type = tc.getType();
 					String fixTime = tc.getFixTime();
 					String year = tc.getYear().toString();
-
 					// check issue & typhoonName & type are the same.
 					if(issue.equals(typeChangingHistory.getIssue()) 
 						&& typhoonName.equals(typeChangingHistory.getTyphoonName())
@@ -92,8 +86,9 @@ private static final Logger processorLogger = LogManager.getLogger(WebTyphProces
 						WebTyphWarning webTyphWarning = new WebTyphWarning();
 						
 						String typhName = new StringBuilder()
-								.append(year).
-								append(typhoonName).toString();
+								.append(year)
+								.append(typhoonName)
+								.toString();
 						webTyphWarning.setTyphName(typhName);
 						
 						webTyphWarning.setAlarmDate(new Timestamp(format.parse(fixTime).getTime()));
@@ -113,22 +108,20 @@ private static final Logger processorLogger = LogManager.getLogger(WebTyphProces
 						}
 						
 						webTyphWarningList.add(webTyphWarning);
-					
-					
 					}else {
 						continue;
 					}
-					
 				}
-				
 			}
+			
+			
 			
 			// 
 			insertWebTyph(webTyphName2NoMap, webTyphWarningList);
 			
 		} catch (Exception e) {
 			processorLogger.error("", e);
-			e.printStackTrace();
+			//e.printStackTrace();
 		} 
 		
 		
@@ -137,9 +130,9 @@ private static final Logger processorLogger = LogManager.getLogger(WebTyphProces
 	}
 	
 	
-	private void insertWebTyph(Map<String, WebTyphName2No> webTyphName2NoMap, List<WebTyphWarning> webTyphWarningList) {
+	private void insertWebTyph(Map<String, WebTyphName2No> webTyphName2NoMap, Set<WebTyphWarning> webTyphWarningList) {
 		
-		List<WebTyphName2No> webTyphName2NoList = new ArrayList<>();
+		Set<WebTyphName2No> webTyphName2NoList = new HashSet<>();
 		for(String key:webTyphName2NoMap.keySet()) {
 			webTyphName2NoList.add(webTyphName2NoMap.get(key));
 		}

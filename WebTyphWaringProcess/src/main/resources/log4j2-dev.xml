@@ -5,7 +5,7 @@
             %d{yyyy-MM-dd HH:mm:ss.SSS} %5p ${hostName} --- [%15.15t] %-40.40c{1.} : %m%n
         </Property>
         <Property name="log-path">
-            /data/workspace/execute/CWBRestClient/logs
+            /data/workspace/execute/WebTyphWarning/logs
         </Property>
     </Properties>
     <Appenders>

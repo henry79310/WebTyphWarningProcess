@@ -1,6 +1,6 @@
 package cwb.webtyphwarn.process;
 
-import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -19,7 +19,7 @@ public class WebTyphWarningDaoMySQLImpl implements WebTyphWarningDao{
 			"INSERT INTO WebTyphWarning (`TyphName`, `AlarmDate`, `State`, `ModifyDate`) VALUES (?,?,?,?)";
 	
 	@Override
-	public void insertWebTyphWarnings(List<WebTyphWarning> webTyphWarnings) {
+	public void insertWebTyphWarnings(Set<WebTyphWarning> webTyphWarnings) {
 		// TODO Auto-generated method stub
 		
 		for(WebTyphWarning webTyphWarning:webTyphWarnings) {

@@ -1,6 +1,6 @@
 package cwb.webtyphwarn.process;
 
-import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -19,7 +19,7 @@ public class WebTyphName2NoDaoMySQLImpl implements WebTyphName2NoDao{
 			"INSERT INTO WebTyphName2No (`TyphNo`, `TyphNameEng`, `TyphNameCht`) VALUES (?,?,?)";
 	
 	@Override
-	public void insertWebTyphName2Nos(List<WebTyphName2No> webTyphName2Nos) {
+	public void insertWebTyphName2Nos(Set<WebTyphName2No> webTyphName2Nos) {
 		// TODO Auto-generated method stub
 		for(WebTyphName2No webTyphName2No:webTyphName2Nos) {
 			jdbcTemplate.update(INSERT_WEB_TYPH_NAME_2_NO_STATEMENT,

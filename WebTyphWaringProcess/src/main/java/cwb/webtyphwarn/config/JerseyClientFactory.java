@@ -12,6 +12,8 @@ import javax.net.ssl.X509TrustManager;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 
+import org.glassfish.jersey.jackson.JacksonFeature;
+
 public class JerseyClientFactory {
 	
 //	private static final int HTTP_MAX_CONNECTION = 200;
@@ -74,6 +76,7 @@ public class JerseyClientFactory {
 							return true;
 						}
 					})
+					.register(JacksonFeature.class)
 					.build();
 			
 			return client;

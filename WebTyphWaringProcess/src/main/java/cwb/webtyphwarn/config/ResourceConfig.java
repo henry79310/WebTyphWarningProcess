@@ -1,6 +1,8 @@
 package cwb.webtyphwarn.config;
 
 import java.util.Calendar;
+import java.util.LinkedList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -40,6 +42,26 @@ public class ResourceConfig {
 		}catch(Exception e) {
 			return Calendar.getInstance().get(Calendar.YEAR);
 		}
+	}
+	
+	
+	@Value("${type.changing.history.patterns}")
+	private String typeChangingHistoryPatterns;
+	@Bean("typeChangingHistoryPatterns")
+	public List<List<String>> getTypeChangingPatterns() {
+		
+		List<List<String>> patternsList = new LinkedList<>(); 
+		String patternArray[] = typeChangingHistoryPatterns.split("\\|");
+		for(String pattern:patternArray) {
+			String values[] = pattern.split(",");
+			List<String> patternList = new LinkedList<>();
+			for(String value:values) {
+				patternList.add(value);
+			}
+			patternsList.add(patternList);
+		}
+		
+		return patternsList;
 	}
 	
 	

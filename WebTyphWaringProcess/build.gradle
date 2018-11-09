@@ -50,6 +50,7 @@ dependencies {
     compile group: 'org.apache.httpcomponents', name: 'httpclient', version: '4.5.3'
     
     compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.7'
+    compile group: 'com.microsoft.sqlserver', name:'sqljdbc4', version:'4.0'
     
    
     compile group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.11.1'

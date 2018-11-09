@@ -6,24 +6,22 @@ import javax.annotation.PreDestroy;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 
 @Configuration
-@PropertySource("classpath:application.properties")
-public class DataSourceConfig {
-	
-	
+//@PropertySource("classpath:application.properties")
+public class MSSQLDataSourceConfig {
+
 	private HikariDataSource dataSource;
 	
-	@Value("${database.mysql.jdbcUrl}")
+	@Value("${database.mssql.jdbcUrl}")
 	private String jdbcUrl;
-	@Value("${database.mysql.username}")
+	@Value("${database.mssql.username}")
 	private String username;
-	@Value("${database.mysql.password}")
+	@Value("${database.mssql.password}")
 	private String password;
 
 	
@@ -31,7 +29,7 @@ public class DataSourceConfig {
 	public void initialHikariCP() throws Exception{
 		
 		HikariConfig config = new HikariConfig();
-//		config.setDataSourceClassName("com.mysql.jdbc.Driver");
+		config.setDataSourceClassName("com.microsoft.sqlserver.jdbc.SQLServerDataSource");
 		config.setJdbcUrl(jdbcUrl);
 		config.setUsername(username);
 		config.setPassword(password);
@@ -52,9 +50,8 @@ public class DataSourceConfig {
 		dataSource.close();
 	}
 	
-	@Bean(name = "jdbcTemplateMySQL")
+	@Bean(name = "jdbcTemplateMSSQL")
 	public JdbcTemplate getJdbcTemplateMySQL(){
 		return new JdbcTemplate(dataSource);
 	}
-
 }
